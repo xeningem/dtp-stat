@@ -29,6 +29,7 @@
     "leaflet": "1.4.0",
     "leaflet-heatmap": "1.0.0",
     "leaflet.locatecontrol": "^0.66.0",
+    "prop-types": "latest",
     "query-string": "^5.0.0",
     "react": "16.3.2",
     "react-dom": "16.3.3",
@@ -37,5 +38,8 @@
     "webpack-bundle-tracker": "0.3.0",
     "webpack-cli": "2.1.2",
     "whatwg-fetch": "2.0.4"
+  },
+  "dependencies": {
+    "leaflet.markercluster": "^1.4.1"
   }
 }

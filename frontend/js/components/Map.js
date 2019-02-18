@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
 import LocationMarker from 'leaflet.locatecontrol'
+import MarkerClusterGroup from 'leaflet.markercluster'
 import HeatmapOverlay from 'leaflet-heatmap';
 import {getColorByParticipantTypeId, getMvcTypeName, mvcHasDeadParticipants} from '../services/mvcs';
 
@@ -86,6 +87,7 @@ export default class Map extends Component {
         this.setLayerBasedOnZoom(mvcs);
 
         this.createMapObjectsMarkers(mapObjectsMarkersData || [])
+        this.map.addLayer(this.mvcPointsLayer);
     }
     createMapObjectsMarkers(mapObjectsMarkersData){
         // This method will create markers and show loaded objects on map
@@ -100,7 +102,11 @@ export default class Map extends Component {
     }
 
     createMvcPointsLayer(mvcs) {
-        this.mvcPointsLayer = new L.FeatureGroup();
+        this.mvcPointsLayer = L.markerClusterGroup({
+            maxClusterRadius: 10,
+            spiderfyDistanceMultiplier: 1
+        });
+        // this.mvcPointsLayer = new L.FeatureGroup();
         this.markers = [];
         this.canvasRenderer = L.canvas({ padding: 0.5 });
         mvcs.forEach(mvc => {
